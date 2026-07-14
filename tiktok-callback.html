@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TikTok Auth — RU DUO USA</title><style>body{font-family:system-ui,sans-serif;background:#0B1220;color:#EAF6FF;max-width:640px;margin:0 auto;padding:56px 24px;line-height:1.6;text-align:center}h1{color:#00E5FF}code{display:block;background:#141d2e;border:1px solid #24344f;border-radius:10px;padding:16px;margin:18px 0;word-break:break-all;font-size:15px;color:#FF3E8A}button{background:#00E5FF;color:#04252b;border:none;border-radius:9px;padding:12px 22px;font-weight:800;font-size:15px;cursor:pointer}.err{color:#ff5d5d}.ok{color:#3ddc84}</style></head><body>
+<h1>RU DUO USA · TikTok</h1>
+<div id="out">Читаю ответ TikTok…</div>
+<script>
+const q = new URLSearchParams(location.search);
+const code = q.get('code'), err = q.get('error'), errd = q.get('error_description');
+const out = document.getElementById('out');
+if(code){
+  out.innerHTML = '<p class="ok">✅ Вход разрешён. Скопируй этот код и вставь в Пост-центр:</p>'
+    + '<code id="c">' + code + '</code>'
+    + '<button onclick="navigator.clipboard.writeText(document.getElementById(\'c\').textContent);this.textContent=\'📋 скопировано\'">📋 Скопировать код</button>'
+    + '<p style="color:#8fa6c4;margin-top:22px;font-size:13px">Код одноразовый и действует несколько минут — вставляй сразу.</p>';
+} else if(err){
+  out.innerHTML = '<p class="err">⚠ TikTok вернул ошибку: ' + err + '</p><p style="color:#8fa6c4">' + (errd||'') + '</p>';
+} else {
+  out.innerHTML = '<p class="err">Нет кода в ответе. Открой ссылку авторизации из Пост-центра заново.</p>';
+}
+</script>
+</body></html>
